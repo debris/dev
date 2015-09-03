@@ -19,8 +19,15 @@ include(EthDependencies)
 include(buildinfo.cmake)
 create_build_info()
 
+include(EthOptions)
+configure_project()
+print_config()
+
 add_subdirectory(libdevcore)
 add_subdirectory(libdevcrypto)
 add_subdirectory(libp2p)
-add_subdirectory(rlp)
+
+if (TOOLS)
+	add_subdirectory(rlp)
+endif()
 
