@@ -176,12 +176,25 @@ inline u256 s2u(s256 _u)
 		return u256(c_end + _u);
 }
 
+/// Converts given int to a string and appends one of a series of units according to its size.
+std::string inUnits(bigint const& _b, strings const& _units);
+
 /// @returns the smallest n >= 0 such that (1 << n) >= _x
 inline unsigned int toLog2(u256 _x)
 {
 	unsigned ret;
 	for (ret = 0; _x >>= 1; ++ret) {}
 	return ret;
+}
+
+template <size_t n> inline u256 exp10()
+{
+	return exp10<n - 1>() * u256(10);
+}
+
+template <> inline u256 exp10<0>()
+{
+	return u256(1);
 }
 
 /// @returns the absolute distance between _a and _b.
